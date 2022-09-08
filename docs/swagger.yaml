@@ -1,0 +1,61 @@
+info:
+  contact: {}
+paths:
+  /v1/shard-analyzer:
+    post:
+      consumes:
+      - application/text
+      description: Endpoint to take cat/shards output and examine they are rightly
+        sharded or not and recommend the right ones if necessary.
+      operationId: shardAnalyzerPost
+      parameters:
+      - default: Cluster-name
+        description: Cluster Name
+        in: query
+        name: clusterName
+        required: true
+        type: string
+      - default: AWS Customer
+        description: Customer Name
+        in: query
+        name: customerName
+        required: true
+        type: string
+      - default: 30
+        description: Target Shard Size in GB
+        in: query
+        name: targetShardSize
+        required: true
+        type: integer
+      - default: 3
+        description: Number of Azs for the cluster
+        in: query
+        name: azs
+        required: true
+        type: integer
+      - default: false
+        description: If log analytics, 1 replica is recommended. If not the replica
+          count will be retained
+        in: query
+        name: isSearchWorkload
+        type: boolean
+      - description: Output of cat/shards.
+        in: body
+        name: query
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      - ' application/pdf'
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Recommend shard strategies
+swagger: "2.0"
