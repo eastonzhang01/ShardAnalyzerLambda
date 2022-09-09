@@ -13,4 +13,11 @@ Previously, the tool has two modes: 'analyze' and 'server'.
 With analyze, you input information using different flags in the command line.
 With server, there will be a port for running the ShardAnalyzer as a server. It comes with swagger ui(`http://localhost:3000/swagger/index.html`) for easy endpoint testing. A report will be generated as a pdf.
 
-As a lambda function, this program will take a JSON from APIGW and send back a response with the recommended sharding strategy. 
+As a lambda function, this program will take a JSON from API Gateway and send back a response with the recommended sharding strategy. 
+
+The JSON data would include things such as target shard size, nature of the workload, and output of _cat/shards?v.
+The output of _cat/shards?v could either be from the request JSON or it would have to be retrieved from a domain endpoint.
+
+The response would then provide information such as a recommendation based on Index Pattern, list of empty indices, and a list of indicies with shards>50GB. 
+
+Lastly, the function would log input data and output or error data. 
