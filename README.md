@@ -1,6 +1,6 @@
 # OpenSearch Shard Analyzer Lambda Function
 
-This tool analyzes the output of `_cat/shards?v` and recommend sharding strategy for the cluster based on the target shard size. 
+This tool analyzes the output of `_cat/shards?v` and recommends a sharding strategy for the cluster based on the target shard size. 
 ### Guidelines
 * **For search workloads** - target shard size could be 10-30 GB
 * **For Log analytics workloads** - target shard size could be 30-50 GB
